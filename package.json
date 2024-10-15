@@ -1,0 +1,33 @@
+{
+  "name": "ics-project",
+  "version": "1.0.0",
+  "description": "Initial commit, More to be added later",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shrishti0308/ICS-project.git"
+  },
+  "keywords": [
+    "sqli"
+  ],
+  "author": "Shrishti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shrishti0308/ICS-project/issues"
+  },
+  "homepage": "https://github.com/shrishti0308/ICS-project#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mysql2": "^3.11.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
