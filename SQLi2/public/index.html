@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dog Pics App</title>
+        <link rel="stylesheet" href="styles.css"> <!-- Add the CSS file -->
+    </head>
+
+<body>
+    <h1>Welcome to Dog Pics App</h1>
+
+    <!-- Form to set preferences -->
+    <form action="/set-preference" method="POST">
+        <label for="filter">Choose your filter:</label>
+        <select name="filter_column" id="filter" required>
+            <option value="">--Select Filter--</option>
+            <option value="fluffiness">Fluffiness</option>
+            <option value="fitness">Fitness</option>
+            <option value="boldness">Boldness</option>
+        </select>
+        <label for="value">Value (1-3):</label>
+        <input type="number" name="filter_value" min="1" max="3" required>
+        <button type="submit">Save Preference</button>
+    </form>
+
+    <hr>
+
+    <!-- Button to view dogs -->
+    <a href="/dogs">
+        <button type="button">View Dogs</button>
+    </a>
+
+    <!-- Section to display filtered dogs -->
+    <div id="dog-results"></div>
+
+    <script>
+        document.getElementById('preference-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const filterColumn = document.getElementById('filter').value;
+            const filterValue = document.getElementById('value').value;
+
+            // Send the preference data to the backend
+            const response = await fetch('http://localhost:3000/set-preference', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    filter_column: filterColumn,
+                    filter_value: filterValue,
+                }),
+            });
+
+            const result = await response.text();
+            alert(result);
+        });
+    </script>
+</body>
+</html>
