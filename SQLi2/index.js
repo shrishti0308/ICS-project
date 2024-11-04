@@ -62,18 +62,44 @@ app.get('/dogs', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'dogs.html'));
 });
 
+// app.get('/view-dogs', (req, res) => {
+//     const userId = 1; // For simplicity, assume the user is always user_id=1
+
+//     const query = `SELECT filter_column, filter_value FROM preferences WHERE user_id = ?`;
+//     connection.execute(query, [userId], (err, results) => {
+//         if (err) throw err;
+
+//         const { filter_column, filter_value } = results[0];
+//         const dogQuery = `SELECT * FROM dogs WHERE ${filter_column} = ?`; // Use parameterized queries to prevent SQL injection
+//         console.log(dogQuery);
+
+//         connection.query(dogQuery, [filter_value], (err, dogs) => {
+//             if (err) throw err;
+
+//             // Send the filtered dogs data as JSON
+//             res.json(dogs);
+//         });
+//     });
+// });
+
 app.get('/view-dogs', (req, res) => {
-    const userId = 1; // For simplicity, assume the user is always user_id=1
+    const userId = 1; // Assume the user is always user_id=1
 
     const query = `SELECT filter_column, filter_value FROM preferences WHERE user_id = ?`;
     connection.execute(query, [userId], (err, results) => {
         if (err) throw err;
 
         const { filter_column, filter_value } = results[0];
-        const dogQuery = `SELECT * FROM dogs WHERE ${filter_column} = ?`; // Use parameterized queries to prevent SQL injection
+        const allowedColumns = ["fluffiness", "fitness", "boldness"]; // Updated allowed columns
+
+        if (!allowedColumns.includes(filter_column)) {
+            return res.status(400).json({ error: "Invalid filter column" });
+        }
+
+        const dogQuery = `SELECT * FROM dogs WHERE ${filter_column} = ?`;
         console.log(dogQuery);
 
-        connection.query(dogQuery, [filter_value], (err, dogs) => {
+        connection.execute(dogQuery, [filter_value], (err, dogs) => {
             if (err) throw err;
 
             // Send the filtered dogs data as JSON
@@ -81,7 +107,6 @@ app.get('/view-dogs', (req, res) => {
         });
     });
 });
-
 
 // Start the server
 app.listen(3000, () => {
