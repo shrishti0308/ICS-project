@@ -22,13 +22,11 @@
             </thead>
             <div id="error-message" style="color: red; margin-bottom: 10px;"></div>
             <tbody>
-                <!-- Table rows will be dynamically inserted here -->
             </tbody>
         </table>
     </div>
 
     <script>
-        // Function to fetch and display data
         async function fetchDogs() {
             try {
                 const response = await fetch('/view-dogs'); // Fetch filtered dog data from server
