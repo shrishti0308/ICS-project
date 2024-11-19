@@ -68,8 +68,18 @@ app.get('/view-dogs', (req, res) => {
     const query = `SELECT filter_column, filter_value FROM preferences WHERE user_id = ?`;
     connection.execute(query, [userId], (err, results) => {
         if (err) throw err;
-
+        
         const { filter_column, filter_value } = results[0];
+
+        // const valid_column = ["Fitness", "Fluffiness", "Boldness"];
+        // if(!valid_column.includes(filter_column)){
+        //     return res.status(400).json(
+        //         {
+        //             error : "Invalid Column Names"
+        //         }
+        //     );
+        // }
+        
         const dogQuery = `SELECT * FROM dogs WHERE ${filter_column} = ?`; // Use parameterized queries to prevent SQL injection
         console.log(dogQuery);
 
