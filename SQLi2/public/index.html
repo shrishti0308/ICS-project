@@ -3,14 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dog Pics App</title>
-        <link rel="stylesheet" href="styles.css"> <!-- Add the CSS file -->
+        <title>Dog App</title>
+        <link rel="stylesheet" href="styles.css"> 
     </head>
 
 <body>
-    <h1>Welcome to Dog Pics App</h1>
+    <h1>Welcome to DogApp</h1>
 
-    <!-- Form to set preferences -->
     <form action="/set-preference" method="POST">
         <label for="filter">Choose your filter:</label>
         <select name="filter_column" id="filter" required>
@@ -26,12 +25,10 @@
 
     <hr>
 
-    <!-- Button to view dogs -->
     <a href="/dogs">
         <button type="button">View Dogs</button>
     </a>
 
-    <!-- Section to display filtered dogs -->
     <div id="dog-results"></div>
 
     <script>
@@ -41,7 +38,6 @@
             const filterColumn = document.getElementById('filter').value;
             const filterValue = document.getElementById('value').value;
 
-            // Send the preference data to the backend
             const response = await fetch('http://localhost:3000/set-preference', {
                 method: 'POST',
                 headers: {

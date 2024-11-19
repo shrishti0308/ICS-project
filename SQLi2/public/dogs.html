@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css"> <!-- Assuming you have the CSS file -->
 </head>
 <body>
-
+   
     <div class="container">
         <h1>Filtered Dog Pics</h1>
         <table id="dogsTable">
@@ -20,14 +20,13 @@
                     <th>Boldness</th>
                 </tr>
             </thead>
+            <div id="error-message" style="color: red; margin-bottom: 10px;"></div>
             <tbody>
-                <!-- Table rows will be dynamically inserted here -->
             </tbody>
         </table>
     </div>
 
     <script>
-        // Function to fetch and display data
         async function fetchDogs() {
             try {
                 const response = await fetch('/view-dogs'); // Fetch filtered dog data from server
@@ -50,6 +49,7 @@
                 });
             } catch (error) {
                 console.error('Error fetching dog data:', error);
+                document.getElementById("error-message").textContent = "Unable to load dog data. Please try again later.";
             }
         }
 

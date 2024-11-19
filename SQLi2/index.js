@@ -62,6 +62,11 @@ app.get('/dogs', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'dogs.html'));
 });
 
+
+app.get('/dogs', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'dogs.html'));
+});
+
 app.get('/view-dogs', (req, res) => {
     const userId = 1; // For simplicity, assume the user is always user_id=1
 
